@@ -23,7 +23,7 @@ from wordcloud import STOPWORDS
 # Dataset #
 ################
 
-df = pd.read_csv('./Suicide_Detection.csv.gzip', compressed="gzip")
+df = pd.read_csv('./Suicide_Detection.csv.gzip', compression="gzip")
 df.columns =['no', 'text', 'class']
 df['no'] = df.index
 
