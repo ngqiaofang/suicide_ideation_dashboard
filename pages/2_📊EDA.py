@@ -33,10 +33,10 @@ df['no'] = df.index
 
 df1 = df.loc[df['class']=="non-suicide"]
 
-# text1 = " ".join(i for i in df1.text.str.lower())
-# text1 = ''.join(i for i in text1 if ord(i) < 128)
-# stopwords = set(STOPWORDS)
-# wordcloud1 = WordCloud(stopwords=stopwords, background_color="white").generate(text1)
+text1 = " ".join(i for i in df1.text.str.lower())
+text1 = ''.join(i for i in text1 if ord(i) < 128)
+stopwords = set(STOPWORDS)
+wordcloud1 = WordCloud(stopwords=stopwords, background_color="white").generate(text1)
 
 ######################
 # suicide wordcloud #
@@ -44,26 +44,26 @@ df1 = df.loc[df['class']=="non-suicide"]
 
 df2 = df.loc[df['class']=="suicide"]
 
-# text2 = " ".join(i for i in df2.text.str.lower())
-# text2 = ''.join(i for i in text2 if ord(i) < 128)
-# stopwords = set(STOPWORDS)
-# wordcloud2 = WordCloud(stopwords=stopwords, background_color="white").generate(text2)
+text2 = " ".join(i for i in df2.text.str.lower())
+text2 = ''.join(i for i in text2 if ord(i) < 128)
+stopwords = set(STOPWORDS)
+wordcloud2 = WordCloud(stopwords=stopwords, background_color="white").generate(text2)
 
-# st.markdown("Wordclouds of non-suicide and suicide text.")
-# tab1, tab2 = st.tabs(["Non-suicide", "Suicide"])
-# with tab1:
-#     fig1 = plt.figure()
-#     plt.imshow(wordcloud1, interpolation='bilinear')
-#     plt.title("Wordcloud of non-suicide")
-#     plt.axis("off")
-#     st.pyplot(fig1)
+st.markdown("Wordclouds of non-suicide and suicide text.")
+tab1, tab2 = st.tabs(["Non-suicide", "Suicide"])
+with tab1:
+    fig1 = plt.figure()
+    plt.imshow(wordcloud1, interpolation='bilinear')
+    plt.title("Wordcloud of non-suicide")
+    plt.axis("off")
+    st.pyplot(fig1)
     
-# with tab2:
-#     fig2 = plt.figure()
-#     plt.imshow(wordcloud2, interpolation='bilinear')
-#     plt.title("Wordcloud of suicide")
-#     plt.axis("off")
-#     st.pyplot(fig2)
+with tab2:
+    fig2 = plt.figure()
+    plt.imshow(wordcloud2, interpolation='bilinear')
+    plt.title("Wordcloud of suicide")
+    plt.axis("off")
+    st.pyplot(fig2)
 
 
 ##########################
@@ -79,7 +79,7 @@ frequency1 = [Counter(emoji1).most_common(10)[i][1] for i in range(10)]
 
 import plotly.express as px
 
-fig1 = px.bar(x=emojies1, y =frequency1, title = "Top 10 emoji used in non-suicide",
+fig1 = px.bar(x=emojies1, y =frequency1, title = "Top 10 emojies used in non-suicide",
               labels={'x': "Emojies", 'y': " "})
 total1 = sum(Counter(emoji1).values())
 
@@ -92,7 +92,7 @@ Counter(emoji2).most_common(10)
 emojies2 = [Counter(emoji2).most_common(10)[i][0] for i in range(10)]
 frequency2 = [Counter(emoji2).most_common(10)[i][1] for i in range(10)]
 
-fig2 = px.bar(x=emojies2, y =frequency2, title = "Top 10 emoji used in suicide",
+fig2 = px.bar(x=emojies2, y =frequency2, title = "Top 10 emojies used in suicide",
               labels={'x': 'Emojies', 'y': ' '})
 total2 = sum(Counter(emoji2).values())
 
