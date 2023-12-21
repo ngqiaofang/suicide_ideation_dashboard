@@ -57,14 +57,14 @@ with tab1:
     # plt.title("Wordcloud of non-suicide")
     # plt.axis("off")
     # st.pyplot(fig1)
-    st.image('./wordcloud1.png', width=512)
+    st.image('./wordcloud1.png', use_column_width='always')
 with tab2:
     # fig2 = plt.figure()
     # plt.imshow(wordcloud2, interpolation='bilinear')
     # plt.title("Wordcloud of suicide")
     # plt.axis("off")
     # st.pyplot(fig2)
-    st.image('./wordcloud2.png', width=512)
+    st.image('./wordcloud2.png', use_column_width='always')
 
 
 ##########################
@@ -115,7 +115,7 @@ data = {'non-suicide':5054, 'suicide':4946}
 classes = list(data.keys())
 number = list(data.values())
 
-
+st.markdown(" ")
 st.markdown("Distribution of Classes")
 fig3 = px.bar(x=classes, y =number, title = "Class Ditribution of Sampling Dataset",
               labels={'x': " ", 'y': " "})
