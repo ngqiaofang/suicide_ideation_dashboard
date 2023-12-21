@@ -52,18 +52,19 @@ df2 = df.loc[df['class']=="suicide"]
 st.markdown("Wordclouds of non-suicide and suicide text.")
 tab1, tab2 = st.tabs(["Non-suicide", "Suicide"])
 with tab1:
-    fig1 = plt.figure()
-    plt.imshow(wordcloud1, interpolation='bilinear')
-    plt.title("Wordcloud of non-suicide")
-    plt.axis("off")
-    st.pyplot(fig1)
-    
+    # fig1 = plt.figure()
+    # plt.imshow(wordcloud1, interpolation='bilinear')
+    # plt.title("Wordcloud of non-suicide")
+    # plt.axis("off")
+    # st.pyplot(fig1)
+    st.image('./wordcloud1.png')
 with tab2:
-    fig2 = plt.figure()
-    plt.imshow(wordcloud2, interpolation='bilinear')
-    plt.title("Wordcloud of suicide")
-    plt.axis("off")
-    st.pyplot(fig2)
+    # fig2 = plt.figure()
+    # plt.imshow(wordcloud2, interpolation='bilinear')
+    # plt.title("Wordcloud of suicide")
+    # plt.axis("off")
+    # st.pyplot(fig2)
+    st.image('./wordcloud1.png')
 
 
 ##########################
