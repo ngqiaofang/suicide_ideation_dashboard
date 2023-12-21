@@ -33,9 +33,9 @@ text = st.text_input('Enter text and press ENTER. This might take some times to 
 import re
 import string
 import nltk
-# nltk.download('punkt')
-# nltk.download('wordnet')
-# nltk.download('omw-1.4')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
 from nltk.stem import WordNetLemmatizer
 wordnet_lemmatizer = WordNetLemmatizer()
 
