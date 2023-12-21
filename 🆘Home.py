@@ -15,7 +15,7 @@ st.set_page_config(
 st.title("Suicide Ideation")
 st.markdown("Suicide ideation, or thoughts of suicide, is a global concern, claiming over 700,000 lives annually and ranking as the fourth leading cause of death among 15-29 years old adults. Malaysia has seen a rise in suicides, with notable cases reported in 2022. ")
 with st.container(border=True):
-    st.image('./dashboard/intro.jpg', caption='Number of suicide in Malaysia')
+    st.image('./intro.jpg', caption='Number of suicide in Malaysia')
 st.markdown('Suicidal ideation shows up with changes in behavior, speech, and thinking, often accompanied by feelings of guilt, shame, and discussions about death. Nowadays, individuals tend to share their thoughts and emotions on social media platforms. This system capitalizes on this trend by collecting posts from social media and training a prediction model with them. The system can be used to predict whether the text indicates suicidal or non-suicidal tendencies.')
 ######################################################################################################################
 # model #
