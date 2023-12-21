@@ -9,3 +9,5 @@ advertools
 demoji
 plotly
 scikit-learn
+wordcloud
+pillow
