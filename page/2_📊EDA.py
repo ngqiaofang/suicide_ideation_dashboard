@@ -19,29 +19,11 @@ from wordcloud import WordCloud
 from wordcloud import ImageColorGenerator
 from wordcloud import STOPWORDS
 
-import time
-#######################
-# loading #
-########################
-# def progressbar():
-
-#     progress_text = "Operation in progress. Please wait."
-#     my_bar = st.progress(0, text=progress_text)
-
-#     for percent_complete in range(100):
-#         time.sleep(0.1)
-#         my_bar.progress(percent_complete + 1, text=progress_text)
-#     time.sleep(1)
-#     my_bar.empty()
-
-# with st.spinner('Wait for it...'):
-#     time.sleep(5)
-# st.success('Done!')
 #################
 # Dataset #
 ################
 
-df = pd.read_csv('./suicide-watch/Suicide_Detection.csv')
+df = pd.read_csv('/suicide_ideation_dashboard/Suicide_Detection.csv.gzip', compressed="gzip")
 df.columns =['no', 'text', 'class']
 df['no'] = df.index
 
@@ -55,14 +37,6 @@ text1 = " ".join(i for i in df1.text.str.lower())
 text1 = ''.join(i for i in text1 if ord(i) < 128)
 stopwords = set(STOPWORDS)
 wordcloud1 = WordCloud(stopwords=stopwords, background_color="white").generate(text1)
-# plt.figure(figsize=(200,180))
-# plt.figure()
-
-# plt.imshow(wordcloud1, interpolation='bilinear')
-# plt.title("Wordcloud of non-suicide")
-# plt.axis("off")
-# st.pyplot()
-
 
 ######################
 # suicide wordcloud #
@@ -74,12 +48,6 @@ text2 = " ".join(i for i in df2.text.str.lower())
 text2 = ''.join(i for i in text2 if ord(i) < 128)
 stopwords = set(STOPWORDS)
 wordcloud2 = WordCloud(stopwords=stopwords, background_color="white").generate(text2)
-# plt.figure()
-
-# plt.imshow(wordcloud2, interpolation='bilinear')
-# plt.title("Wordcloud of suicide")
-# plt.axis("off")
-# st.pyplot()
 
 st.markdown("Wordclouds of non-suicide and suicide text.")
 tab1, tab2 = st.tabs(["Non-suicide", "Suicide"])
@@ -109,14 +77,10 @@ Counter(emoji1).most_common(10)
 emojies1 = [Counter(emoji1).most_common(10)[i][0] for i in range(10)]
 frequency1 = [Counter(emoji1).most_common(10)[i][1] for i in range(10)]
 
-# import plotly.figure_factory as ff
 import plotly.express as px
 
 fig1 = px.bar(x=emojies1, y =frequency1, title = "Top 10 emoji used in non-suicide",
               labels={"emojies2": "Emojies", "frequency2": " "})
-# fg = iplot([trace])
-# st.plotly_chart(fig1, use_container_width=True)
-# st.write("Total of ", Counter(emoji1).total(), "used in non-suicide")
 
 ##########################
 # emoji suicide #
@@ -129,9 +93,6 @@ frequency2 = [Counter(emoji2).most_common(10)[i][1] for i in range(10)]
 
 fig2 = px.bar(x=emojies2, y =frequency2, title = "Top 10 emoji used in suicide",
               labels={"emojies2": "Emojies", "frequency2": " "})
-# fg = iplot([trace])
-# st.plotly_chart(fig2, use_container_width=True)
-# st.write("Total of ", Counter(emoji2).total(), "used in suicide")
 
 
 st.markdown("Top 10 emojies used in non-suicide and suicide text.")
@@ -152,16 +113,6 @@ data = {'non-suicide':5054, 'suicide':4946}
 classes = list(data.keys())
 number = list(data.values())
 
-# plt.figure()
-
-# # creating the bar plot
-# plt.bar(x, y, color ='maroon')
-
-# plt.xlabel("class")
-# plt.ylabel("number of text")
-# plt.title("Class Distribution of Sampling Dataset")
-# # plt.show()
-# st.pyplot()
 
 st.markdown("Distribution of Classes")
 fig3 = px.bar(x=classes, y =number, title = "Class Ditribution of Sampling Dataset",
