@@ -57,14 +57,14 @@ with tab1:
     # plt.title("Wordcloud of non-suicide")
     # plt.axis("off")
     # st.pyplot(fig1)
-    st.image('./wordcloud1.png')
+    st.image('./wordcloud1.png', width=512)
 with tab2:
     # fig2 = plt.figure()
     # plt.imshow(wordcloud2, interpolation='bilinear')
     # plt.title("Wordcloud of suicide")
     # plt.axis("off")
     # st.pyplot(fig2)
-    st.image('./wordcloud2.png', width=12)
+    st.image('./wordcloud2.png', width=512)
 
 
 ##########################
