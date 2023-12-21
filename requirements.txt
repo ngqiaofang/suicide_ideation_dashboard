@@ -3,7 +3,6 @@ pandas
 numpy
 matplotlib
 joblib
-string
 nltk
 emoji
 advertools
