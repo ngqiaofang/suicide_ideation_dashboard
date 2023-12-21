@@ -1,7 +1,7 @@
 streamlit
 pandas
 numpy
-matplotli
+matplotlib
 joblib
 re
 string
