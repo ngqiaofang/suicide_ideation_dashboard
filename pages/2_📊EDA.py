@@ -80,7 +80,7 @@ frequency1 = [Counter(emoji1).most_common(10)[i][1] for i in range(10)]
 import plotly.express as px
 
 fig1 = px.bar(x=emojies1, y =frequency1, title = "Top 10 emoji used in non-suicide",
-              labels={'emojies1': "Emojies", 'frequency1': " "})
+              labels={'x': "Emojies", 'y': " "})
 total1 = sum(Counter(emoji1).values())
 
 ##########################
