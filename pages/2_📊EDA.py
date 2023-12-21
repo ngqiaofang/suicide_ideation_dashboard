@@ -117,6 +117,6 @@ number = list(data.values())
 
 st.markdown("Distribution of Classes")
 fig3 = px.bar(x=classes, y =number, title = "Class Ditribution of Sampling Dataset",
-              labels={classes: " ", number: " "})
+              labels={'x': " ", 'y': " "})
 # fg = iplot([trace])
 st.plotly_chart(fig3, use_container_width=True)
