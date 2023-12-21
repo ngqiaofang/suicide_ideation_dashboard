@@ -81,6 +81,7 @@ import plotly.express as px
 
 fig1 = px.bar(x=emojies1, y =frequency1, title = "Top 10 emoji used in non-suicide",
               labels={"emojies2": "Emojies", "frequency2": " "})
+total1 = sum(Counter(emoji1).values())
 
 ##########################
 # emoji suicide #
@@ -93,16 +94,16 @@ frequency2 = [Counter(emoji2).most_common(10)[i][1] for i in range(10)]
 
 fig2 = px.bar(x=emojies2, y =frequency2, title = "Top 10 emoji used in suicide",
               labels={"emojies2": "Emojies", "frequency2": " "})
-
+total2 = sum(Counter(emoji2).values())
 
 st.markdown("Top 10 emojies used in non-suicide and suicide text.")
 tab1, tab2 = st.tabs(["Non-suicide", "Suicide"])
 with tab1:
     st.plotly_chart(fig1, use_container_width=True)
-    st.write("Total of ", Counter(emoji1).total(), "emojies are used in non-suicide")
+    st.write("Total of ", total1, "emojies are used in non-suicide")
 with tab2:
     st.plotly_chart(fig2, use_container_width=True)
-    st.write("Total of ", Counter(emoji2).total(), "emojies are used in suicide")
+    st.write("Total of ", total2, "emojies are used in suicide")
     
 
 ######################
