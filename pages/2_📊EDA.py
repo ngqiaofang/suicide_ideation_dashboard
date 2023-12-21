@@ -64,7 +64,7 @@ with tab2:
     # plt.title("Wordcloud of suicide")
     # plt.axis("off")
     # st.pyplot(fig2)
-    st.image('./wordcloud1.png')
+    st.image('./wordcloud2.png', width=12)
 
 
 ##########################
