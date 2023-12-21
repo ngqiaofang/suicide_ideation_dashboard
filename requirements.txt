@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+matplotlib.pyplot
+joblib
+re
+string
+nltk
+emoji
+advertools
+demoji
+plotly.express
