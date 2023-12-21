@@ -33,10 +33,10 @@ df['no'] = df.index
 
 df1 = df.loc[df['class']=="non-suicide"]
 
-text1 = " ".join(i for i in df1.text.str.lower())
-text1 = ''.join(i for i in text1 if ord(i) < 128)
-stopwords = set(STOPWORDS)
-wordcloud1 = WordCloud(stopwords=stopwords, background_color="white").generate(text1)
+# text1 = " ".join(i for i in df1.text.str.lower())
+# text1 = ''.join(i for i in text1 if ord(i) < 128)
+# stopwords = set(STOPWORDS)
+# wordcloud1 = WordCloud(stopwords=stopwords, background_color="white").generate(text1)
 
 ######################
 # suicide wordcloud #
@@ -44,10 +44,10 @@ wordcloud1 = WordCloud(stopwords=stopwords, background_color="white").generate(t
 
 df2 = df.loc[df['class']=="suicide"]
 
-text2 = " ".join(i for i in df2.text.str.lower())
-text2 = ''.join(i for i in text2 if ord(i) < 128)
-stopwords = set(STOPWORDS)
-wordcloud2 = WordCloud(stopwords=stopwords, background_color="white").generate(text2)
+# text2 = " ".join(i for i in df2.text.str.lower())
+# text2 = ''.join(i for i in text2 if ord(i) < 128)
+# stopwords = set(STOPWORDS)
+# wordcloud2 = WordCloud(stopwords=stopwords, background_color="white").generate(text2)
 
 st.markdown("Wordclouds of non-suicide and suicide text.")
 tab1, tab2 = st.tabs(["Non-suicide", "Suicide"])
