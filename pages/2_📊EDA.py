@@ -1,7 +1,9 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
+from streamlit_extras import add_vertical_space as avs
+from streamlit_extras.switch_page_button import switch_page 
 
 st.set_page_config(
     page_title="EDA",
@@ -10,14 +12,17 @@ st.set_page_config(
 )
 
 st.title("Exploratory Data Analysis")
-# st.markdown("This page contains the information of EDA.")
-st.text("It might take some times (few minutes) to load.")
+
+
+st.sidebar.markdown("## Do you need help?")
+st.sidebar.link_button("Helplines", "https://findahelpline.com/countries/my/topics/suicidal-thoughts")
+
+
+avs.add_vertical_space(2) 
+
 ######################################################################################################################
 # EDA #
 ######################################################################################################################
-from wordcloud import WordCloud
-from wordcloud import ImageColorGenerator
-from wordcloud import STOPWORDS
 
 #################
 # Dataset #
@@ -27,97 +32,124 @@ df = pd.read_csv('pages/Suicide_Detection.csv.gzip', compression="gzip")
 df.columns =['no', 'text', 'class']
 df['no'] = df.index
 
-##########################
-# non-suicide wordcloud #
-##########################
+df1 = df.loc[df['class']=="suicide"]
+df2 = df.loc[df['class']=="non-suicide"]
 
-df1 = df.loc[df['class']=="non-suicide"]
 
-# text1 = " ".join(i for i in df1.text.str.lower())
-# text1 = ''.join(i for i in text1 if ord(i) < 128)
-# stopwords = set(STOPWORDS)
-# wordcloud1 = WordCloud(stopwords=stopwords, background_color="white").generate(text1)
+
+#######################
+# Wordcloud
+#########################
+
+st.subheader("Word Clouds of Suicide and Non-suicide Texts")
+tab1, tab2 = st.tabs(["Suicide", "Non-suicide"])
 
 ######################
 # suicide wordcloud #
 ######################
 
-df2 = df.loc[df['class']=="suicide"]
-
-# text2 = " ".join(i for i in df2.text.str.lower())
-# text2 = ''.join(i for i in text2 if ord(i) < 128)
-# stopwords = set(STOPWORDS)
-# wordcloud2 = WordCloud(stopwords=stopwords, background_color="white").generate(text2)
-
-st.markdown("Wordclouds of non-suicide and suicide text.")
-tab1, tab2 = st.tabs(["Non-suicide", "Suicide"])
 with tab1:
-    # fig1 = plt.figure()
-    # plt.imshow(wordcloud1, interpolation='bilinear')
-    # plt.title("Wordcloud of non-suicide")
-    # plt.axis("off")
-    # st.pyplot(fig1)
-    st.image('./wordcloud1.png', use_column_width='always')
+
+    st.image('./wordcloud_suicide.png', caption="Suicide Texts", use_column_width='auto')
+    with st.expander("See Explanation"):
+        st.write(f"""In suicide texts, keywords like "know", "want", "feel", "life" and "think" stand out prominently. 
+                 This suggest a consistent thematic focus on understanding, personal desires, emotional expression, 
+                 life's challenges, and introspective thinking. Additionally, negative words related to suicide, 
+                 such as "die", "kill", "depression" and "help" can be found in the word cloud, indicating a more distressing tone.
+                 """)
+        st.write(f"""The identifiable linguistic patterns in suicide texts may provide valuable insights for 
+                 the development of tools aimed at early detection for individuals expressing suicidal thoughts.""")
+     
+
+##########################
+# non-suicide wordcloud #
+##########################
+                
 with tab2:
-    # fig2 = plt.figure()
-    # plt.imshow(wordcloud2, interpolation='bilinear')
-    # plt.title("Wordcloud of suicide")
-    # plt.axis("off")
-    # st.pyplot(fig2)
-    st.image('./wordcloud2.png', use_column_width='always')
 
+    st.image('./wordcloud_non-suicide.png', caption="Non-suicide Texts", use_column_width='auto')
+    with st.expander("See Explanation"):
+        st.write(f"""Compared to suicide texts, there isn't a clear set of specific words that stand out prominently 
+                 in non-suicide texts, indicating a random distribution of words. This suggests a diverse range of topics 
+                 and expressions without consistent linguistic markers. Additionally, a typing pattern is observed where 
+                 individuals tend to continuously repeat the same words, like "cheese cheese", "filler filler", "fuck fuck" 
+                 and "sus sus". 
+                 """)
 
-##########################
-# emoji non-suicide #
-##########################
-import emoji
-from collections import Counter
+avs.add_vertical_space(2) 
+st.divider()
+################################################################################################
+# emoji
+########################################################
+st.subheader("Emojis Used in Suicide and Non-suicide Texts")
 
-emoji1 = "".join(x for i in df1.text for x in i if emoji.is_emoji(x) )
-Counter(emoji1).most_common(10)
-emojies1 = [Counter(emoji1).most_common(10)[i][0] for i in range(10)]
-frequency1 = [Counter(emoji1).most_common(10)[i][1] for i in range(10)]
-
-import plotly.express as px
-
-fig1 = px.bar(x=emojies1, y =frequency1, title = "Top 10 emojies used in non-suicide",
-              labels={'x': "Emojies", 'y': " "})
-total1 = sum(Counter(emoji1).values())
 
 ##########################
 # emoji suicide #
 ##########################
 
-emoji2 = "".join(x for i in df2.text for x in i if emoji.is_emoji(x) )
-Counter(emoji2).most_common(10)
-emojies2 = [Counter(emoji2).most_common(10)[i][0] for i in range(10)]
-frequency2 = [Counter(emoji2).most_common(10)[i][1] for i in range(10)]
+emojis1 = np.load('./emoji_suicide.npy').tolist()
+frequency1 = np.load('./frequency_suicide.npy').tolist()
 
-fig2 = px.bar(x=emojies2, y =frequency2, title = "Top 10 emojies used in suicide",
-              labels={'x': 'Emojies', 'y': ' '})
-total2 = sum(Counter(emoji2).values())
+fig1 = px.bar(x=emojis1, y =frequency1[:-1], title = "Top 10 emojis used in suicide texts",
+              labels={'x': 'Emojis', 'y': 'Count'})
+fig1.update_xaxes(showgrid=False)
+fig1.update_yaxes(showgrid=False)
+fig1.update_traces(marker_color='#f8a811')
+total1 = frequency1[-1]
 
-st.markdown("Top 10 emojies used in non-suicide and suicide text.")
-tab1, tab2 = st.tabs(["Non-suicide", "Suicide"])
+totalstr1 = f"""
+<p>Total of <span style="color:#ff7a12; font-weight: bold">{total1}</span> emojis used in suicide texts.</p>
+"""
+
+##########################
+# emoji non-suicide #
+##########################
+
+
+emojis2 = np.load('./emoji_non-suicide.npy').tolist()
+frequency2 = np.load('./frequency_non-suicide.npy').tolist()
+
+fig2 = px.bar(x=emojis2, y =frequency2[:-1], title = "Top 10 emojis used in non-suicide texts",
+              labels={'x': "Emojis", 'y': "Count"}, color_discrete_sequence =['#f8a811']*len(emojis2))
+fig2.update_xaxes(showgrid=False)
+fig2.update_yaxes(showgrid=False)
+total2 = frequency2[-1]
+
+totalstr2 = f"""
+<p>Total of <span style="color:#ff7a12; font-weight: bold">{total2}</span> emojis used in non-suicide texts.</p>
+"""
+
+tab1, tab2 = st.tabs(["Suicide", "Non-suicide"])
 with tab1:
     st.plotly_chart(fig1, use_container_width=True)
-    st.write("Total of ", total1, "emojies are used in non-suicide")
+    st.write(totalstr1, unsafe_allow_html=True)
+    avs.add_vertical_space(1) 
+    with st.expander("See Explanation"):
+        st.write(f"""Emojis in suicide texts mostly consist of facial expressions, evoking emotions like sadness 
+                 and disappointment. Negative emotions are prominently represented through emojis like the loud 
+                 crying face 😭, the disappointed face 😞, and the broken heart 💔', emphasizing themes 
+                 of sadness, disappointment, and emotional pain. Only a minority of positive emojis is present 
+                 within the top 10 used emojis and the total count of emojis is much less than in non-suicide texts. 
+                 """)
+
+
+
 with tab2:
     st.plotly_chart(fig2, use_container_width=True)
-    st.write("Total of ", total2, "emojies are used in suicide")
+    st.write(totalstr2, unsafe_allow_html=True)
+    avs.add_vertical_space(1) 
+    with st.expander("See Explanation"):
+        st.write(f"""The most frequently used emojis in non-suicide texts express various feeling, from joy 
+                 to sadness and also include object-related symbols such as the pool 8 ball 🎱. Emojis like 
+                 the laughter emoji 😂 shows fun and playfulness, while the crying face emoji 😭 reflects sadness, 
+                 contributing to the diverse emotional landscape. Only a few of negative emojis is present within 
+                 the top 10 used emojis and there are lots of emojis used compared to suicide texts. 
+                 """)
     
-
-######################
-# class distribution #
-######################
-
-data = {'non-suicide':5054, 'suicide':4946}
-classes = list(data.keys())
-number = list(data.values())
-
-st.markdown(" ")
-st.markdown("Distribution of Classes")
-fig3 = px.bar(x=classes, y =number, title = "Class Ditribution of Sampling Dataset",
-              labels={'x': " ", 'y': " "})
-# fg = iplot([trace])
-st.plotly_chart(fig3, use_container_width=True)
+avs.add_vertical_space(2)
+col1, col2, col3 = st.columns([1,3,1])
+with col2:
+    predictpage = st.button("Let's try to predict your text", use_container_width=True)
+    if predictpage:
+        switch_page("prediction")
