@@ -11,3 +11,4 @@ plotly
 scikit-learn
 wordcloud
 pillow
+streamlit_extras
