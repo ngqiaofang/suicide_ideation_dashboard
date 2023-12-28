@@ -13,6 +13,10 @@ st.set_page_config(
 
 st.title("About the System")
 
+st.sidebar.markdown("## More About Suicide")
+st.sidebar.link_button("Suicide", "https://www.who.int/news-room/fact-sheets/detail/suicide")
+st.sidebar.link_button("World Suicide Prevention Day", "https://www.who.int/campaigns/world-suicide-prevention-day")
+st.sidebar.markdown("---")
 st.sidebar.markdown("## Do you need help?")
 st.sidebar.link_button("Helplines", "https://findahelpline.com/countries/my/topics/suicidal-thoughts")
 
