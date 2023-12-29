@@ -22,10 +22,6 @@ st.set_page_config(
 
 st.title("Suicide Ideation Prediction")
 
-st.sidebar.markdown("## More About Suicide")
-st.sidebar.link_button("Suicide", "https://www.who.int/news-room/fact-sheets/detail/suicide")
-st.sidebar.link_button("World Suicide Prevention Day", "https://www.who.int/campaigns/world-suicide-prevention-day")
-st.sidebar.markdown("---")
 st.sidebar.markdown("## Do you need help?")
 st.sidebar.link_button("Helplines", "https://findahelpline.com/countries/my/topics/suicidal-thoughts")
 
@@ -78,7 +74,7 @@ quote = f"""
 ######################################################################################################################
 
 ###### model & vectorizer import ##########
-model = joblib.load('./logistic_regression_model.joblib')
+model = joblib.load('./logistic_regression.joblib')
 vectorizer = joblib.load('./vectorizer.pkl')
 
 st.subheader('Let\'s try to predict your text:')
@@ -111,16 +107,16 @@ else:
 ######################## model
 avs.add_vertical_space(2) 
 if not submitted:
-    modelpage = st.button("Look into how's the prediction system works")
+    modelpage = st.button("Look into how's the prediction system works", use_container_width=True)
     if modelpage:
         switch_page("system")
 
 ####### preprocess text ##########
 
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
-nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('wordnet')
+# nltk.download('omw-1.4')
+# nltk.download('stopwords')
 
 wordnet_lemmatizer = WordNetLemmatizer()
 
@@ -158,7 +154,7 @@ emojidf = adv.emoji_df
 def emoji_extraction(text):
     emojis = [x for x in text if emoji.is_emoji(x)]
     emojies_count = emoji.emoji_count(text)
-    unique_emojies_count = emoji.emoji_count(text, unique=True)
+    # unique_emojies_count = emoji.emoji_count(text, unique=True)
     mostfreqemoji = mostfrequencyemoji(emojis)
     emojilabel = emojidf.index[emojidf['emoji'] == mostfreqemoji].tolist()
     if len(emojilabel) < 1:
@@ -166,8 +162,11 @@ def emoji_extraction(text):
     else:
         emojilabel = emojilabel[0] + 1
 
+    # df = {'emojies_count': emojies_count,
+    # 'unique_emojies_count': unique_emojies_count,
+    # 'most_freq_emoji': emojilabel}
+
     df = {'emojies_count': emojies_count,
-    'unique_emojies_count': unique_emojies_count,
     'most_freq_emoji': emojilabel}
 
     return df
@@ -179,7 +178,7 @@ def text_vectorization(text, df1):
     unigram = pd.DataFrame.sparse.from_spmatrix(unigram)
     unigram = unigram.iloc[-1:]
     unigram['emojies_count'] = df1['emojies_count']
-    unigram['unique_emojies_count'] = df1['unique_emojies_count']
+    # unigram['unique_emojies_count'] = df1['unique_emojies_count']
     unigram['most_freq_emoji'] = df1['most_freq_emoji']
     
     return unigram
@@ -201,17 +200,16 @@ if submitted:
     if y_pred == 0:
         st.balloons()
         st.subheader("Congratulations! Your text is classified as non-suicide text!")
-        modelpage = st.button("Look into how's the prediction system works")
+        modelpage = st.button("Look into how's the prediction system works", use_container_width=True)
         if modelpage:
             switch_page("system")
     else:
-        st.subheader("Your text is classified as suicide text.")
+        st.subheader("Your text is classified as suicide text.")      
         st.markdown(quote, unsafe_allow_html=True)
-        col1, col2, col3 = st.columns([1,3,1])
+        col1, col2, col3 = st.columns([2,3,2])
         with col2:
             st.link_button("Find a helpline here", "https://findahelpline.com/countries/my/topics/suicidal-thoughts", use_container_width=True)
             avs.add_vertical_space(1)
-
             modelpage = st.button("Look into how's the prediction system works", use_container_width=True)
             if modelpage:
-                switch_page("system")    
+                switch_page("system")   
