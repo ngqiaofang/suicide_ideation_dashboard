@@ -76,7 +76,7 @@ if selected == "Dataset":
 if selected == "Model":
     scikiturl = "https://scikit-learn.org/0.16/modules/generated/sklearn.linear_model.LogisticRegression.html"
     scikit= f"""    
-    <p>The calssification model used is <span style="font: bold; color: #f8a811">Logistic Regression</span> from
+    <p>The classification model used is <span style="font: bold; color: #f8a811">Logistic Regression</span> from
     <a href={scikiturl}>scikit-learn </a>python library.</p>
     """
     st.subheader('Logistic Regression')
