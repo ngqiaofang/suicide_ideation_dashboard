@@ -100,7 +100,7 @@ if selected == "Model":
     #     st.pyplot()
     data = {
         "Metics": ["Accuracy", "F1-score", "Precision", "Recall"],
-        "Values": ["0.91","0.90", "0,91", "0.91"]
+        "Values": ["0.91","0.90", "0.91", "0.91"]
     }
     df = pd.DataFrame(data)
     st.dataframe(data,hide_index=True, use_container_width=True)
