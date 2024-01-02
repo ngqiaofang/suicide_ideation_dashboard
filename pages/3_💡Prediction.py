@@ -74,8 +74,8 @@ quote = f"""
 ######################################################################################################################
 
 ###### model & vectorizer import ##########
-model = joblib.load('./logistic_regression.joblib')
-vectorizer = joblib.load('./vectorizer.pkl')
+model = joblib.load('./svm_compressed.pkl')
+vectorizer = joblib.load('./vectorizer_tfidf.pkl')
 
 st.subheader('Let\'s try to predict your text:')
 
