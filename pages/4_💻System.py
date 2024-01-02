@@ -3,7 +3,7 @@ import plotly.express as px
 from streamlit_extras import add_vertical_space as avs 
 import pandas as pd
 from streamlit_extras.switch_page_button import switch_page 
-
+import plotly.graph_objs as go
 
 st.set_page_config(
     page_title="About the System",
@@ -105,26 +105,20 @@ if selected == "Model":
     df = pd.DataFrame(data)
     st.dataframe(data,hide_index=True, use_container_width=True)
 
+    cm = [[1391,95], [ 160 ,1354]]
+    # create the heatmap
+    heatmap = go.Heatmap(z=cm, text=cm, texttemplate="%{text}",textfont={"size":15}, x=['non-suicide', 'suicide'], y=['non-suicide', 'suicide'], colorscale='Oranges')
 
+    # create the layout
+    layout = go.Layout(title='Confusion Matrix', xaxis=dict(title="Predicted Label"), yaxis=dict(title="True Label"))
 
-    # # Imports
-    # from mlxtend.plotting import plot_confusion_matrix
-    # import matplotlib.pyplot as plt
-    # import numpy as np
+    # create the figure
+    fig = go.Figure(data=[heatmap], layout=layout)
+    fig.layout.height = 500
+    fig.layout.width = 500
 
-    # # Your Confusion Matrix
-    # cm = np.array([[1401, 85],
-    #                 [ 200, 1314]])
-
-    # # Classes
-    # classes = ['non-suicide', 'suicide']
-
-    # figure, ax = plot_confusion_matrix(conf_mat = cm,
-    #                                 class_names = classes,
-    #                                 show_absolute = False,
-    #                                 show_normed = True,
-    #                                 colorbar = True)
-    # st.pyplot(figure)
+    # show the figure
+    st.plotly_chart(fig, use_container_width=True)
 
 
 if selected == "Features":
