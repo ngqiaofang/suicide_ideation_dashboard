@@ -149,7 +149,44 @@ with tab2:
                  contributing to the diverse emotional landscape. Only a few of negative emojis is present within 
                  the top 10 used emojis and there are lots of emojis used compared to suicide texts. 
                  """)
-    
+
+avs.add_vertical_space(2) 
+st.divider()
+################################################################################################
+# sentiment
+########################################################
+st.subheader("Sentiment Distribution in Suicide and Non-suicide Texts")
+
+
+fig1 = px.bar(x=["Negative", "Neutral", "Positive"], y =[73872, 20730, 21435], title = "Sentiment labels distribution in suicide text",
+              labels={'x': 'Sentiment Label', 'y': 'Count'}, color_discrete_sequence =['#f8a811']*3)
+fig1.update_xaxes(showgrid=False)
+fig1.update_yaxes(showgrid=False)
+
+
+fig2 = px.bar(x=["Negative", "Neutral", "Positive"], y =[26369, 49047, 40621], title = "Sentiment labels distribution in non-suicide text",
+              labels={'x': 'Sentiment Label', 'y': 'Count'}, color_discrete_sequence =['#f8a811']*3)
+fig2.update_xaxes(showgrid=False)
+fig2.update_yaxes(showgrid=False)
+
+
+tab1, tab2 = st.tabs(["Suicide", "Non-suicide"])
+with tab1:
+    st.plotly_chart(fig1, use_container_width=True)
+    avs.add_vertical_space(1) 
+    with st.expander("See Explanation"):
+        st.write(f"""Most of the suicidal text is labeled as negative. This suggests that 
+                 the main emotional tone in suicidal texts is negative.
+                 """)
+
+with tab2:
+    st.plotly_chart(fig2, use_container_width=True)
+    avs.add_vertical_space(1) 
+    with st.expander("See Explanation"):
+        st.write(f"""Most of the non-suicidal texts are labeled as positive or neutral, with only a few categorized as negative. 
+                 This suggests that the main emotional tone in non-suicidal texts is positive or neutral.
+                 """)
+
 avs.add_vertical_space(2)
 col1, col2, col3 = st.columns([1,3,1])
 with col2:
