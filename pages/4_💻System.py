@@ -74,33 +74,19 @@ if selected == "Dataset":
 
 
 if selected == "Model":
-    scikiturl = "https://scikit-learn.org/0.16/modules/generated/sklearn.linear_model.LogisticRegression.html"
+    scikiturl = "https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC"
     scikit= f"""    
-    <p>The classification model used is <span style="font: bold; color: #f8a811">Logistic Regression</span> from
+    <p>The calssification model used is <span style="font: bold; color: #f8a811">Support Vector Machine(SVM)</span> from
     <a href={scikiturl}>scikit-learn </a>python library.</p>
     """
-    st.subheader('Logistic Regression')
+    st.subheader('SVM')
     st.markdown(scikit, unsafe_allow_html=True)
-    st.markdown("The paremeters are set to default except for:")
-    st.markdown("- Solver: liblinear")
-    st.markdown("- Max_iter: 10000")
-
-    st.text("'liblinear' is a solver that recommended when we have high dimension dataset (recommended for solving large-scale classification problems)")
-# “liblinear” (A Library for Large Linear Classification):
-
-# It’s a linear classification that supports logistic regression and linear support vector machines.
-
-# The solver uses a Coordinate Descent (CD) algorithm that solves optimization problems by successively performing approximate minimization along coordinate directions or coordinate hyperplanes.
-
-# liblinear applies L1 Regularization and it’s recommended when we have high dimension dataset (recommended for solving large-scale classification problems).
 
     avs.add_vertical_space(2)
     st.subheader('Result of Training Model')
-    # plot_confusion_matrix(model, x_test, y_test, display_labels=   class_names)
-    #     st.pyplot()
     data = {
         "Metics": ["Accuracy", "F1-score", "Precision", "Recall"],
-        "Values": ["0.91","0.90", "0.91", "0.91"]
+        "Values": ["0.92","0.91", "0.92", "0.92"]
     }
     df = pd.DataFrame(data)
     st.dataframe(data,hide_index=True, use_container_width=True)
@@ -123,7 +109,7 @@ if selected == "Model":
 
 if selected == "Features":
     st.subheader('Features Selected:')
-    st.markdown("- Text vectorization, including emoji-converted text, using unigram")
+    st.markdown("- Text vectorization, including emoji-converted text, using Term Frequency - Inverse Document Frequency (TF-IDF)")
     st.markdown("- Count of emoji in the text")
     st.markdown("- Most frequent used emoji in the text")
     
