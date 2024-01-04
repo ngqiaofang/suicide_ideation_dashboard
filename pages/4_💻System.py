@@ -93,7 +93,7 @@ if selected == "Model":
 
     cm = [[1391,95], [ 160 ,1354]]
     # create the heatmap
-    heatmap = go.Heatmap(z=cm, text=cm, texttemplate="%{text}",textfont={"size":15}, x=['non-suicide', 'suicide'], y=['non-suicide', 'suicide'], colorscale='Oranges')
+    heatmap = go.Heatmap(z=cm, text=cm, texttemplate="%{text}",textfont={"size":15}, x=['non-suicide', 'suicide'], y=['non-suicide', 'suicide'], colorscale='Blues')
 
     # create the layout
     layout = go.Layout(title='Confusion Matrix', xaxis=dict(title="Predicted Label"), yaxis=dict(title="True Label"))
