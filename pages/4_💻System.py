@@ -104,7 +104,7 @@ if selected == "Model":
     fig.layout.width = 500
 
     # show the figure
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig)
 
 
 if selected == "Features":
