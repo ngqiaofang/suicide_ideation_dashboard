@@ -103,7 +103,7 @@ if inputType == 'File':
     if submitted:
         stringio=StringIO(submitted.getvalue().decode('utf-8'))
         text=stringio.read()
-        st.text(text)
+        
 else:
     with st.form("myform"):
         text = st.text_input("Enter text and click submit. This might take some times to load the result.", "")
