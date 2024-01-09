@@ -84,21 +84,29 @@ vectorizer = joblib.load('./vectorizer_tfidf.pkl')
 st.subheader('Let\'s try to predict your text:')
 
 ####################### user input ######################
+if 'btn_clicked' not in st.session_state:
+    st.session_state['btn_clicked'] = False
 
 st.markdown("Choose the input method you prefer:")
 rows = row(2, vertical_align="center")
 but1 = rows.button("Text", use_container_width=True)
 but2 = rows.button("File", use_container_width=True)
-# inputType = st.radio("",["Text", "File"], horizontal=True)
+# inputType = st.selectbox("",["Text", "File"], label_visibility ='collapsed')
+
+if st.session_state['btn_clicked'] == False:
+    inputType = 'Text'
 
 if but2:
     inputType = 'File'
-else:
+    st.session_state['btn_clicked'] = True
+
+if but1:
     inputType = 'Text'
+    st.session_state['btn_clicked'] = False
 
 avs.add_vertical_space(1) 
 
-if inputType == 'File':
+if st.session_state['btn_clicked'] == True:
     submitted = st.file_uploader("Upload a .txt file. This might take some times to load the result.", type=("txt"))
     if submitted:
         stringio=StringIO(submitted.getvalue().decode('utf-8'))
