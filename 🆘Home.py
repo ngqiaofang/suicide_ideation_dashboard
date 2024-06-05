@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_extras import add_vertical_space as avs 
 from streamlit_extras.switch_page_button import switch_page 
+from streamlit.components.v1 import html
 
 ######################################################################################################################
 # title #
@@ -86,7 +87,7 @@ html1 = f"""
     </script>"""
 
 
-st.components.v1.html(html1, height = 70)
+html(html1, height = 70)
 text1 = f"""
 <h2 style='
     text-align: center; 
