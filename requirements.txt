@@ -8,7 +8,7 @@ emoji
 advertools==0.14.4
 demoji
 plotly
-scikit-learn
+scikit-learn==1.3.2
 wordcloud
 pillow
 streamlit_extras
