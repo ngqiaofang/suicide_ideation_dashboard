@@ -5,7 +5,7 @@ matplotlib
 joblib
 nltk
 emoji
-advertools
+advertools==0.15.0
 demoji
 plotly
 scikit-learn
