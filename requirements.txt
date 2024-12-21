@@ -3,7 +3,7 @@ pandas
 numpy
 matplotlib
 joblib
-nltk
+nltk==3.8.1
 emoji
 advertools==0.14.4
 demoji
