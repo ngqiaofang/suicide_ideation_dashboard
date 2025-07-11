@@ -11,4 +11,4 @@ plotly
 scikit-learn==1.3.2
 wordcloud
 pillow
-streamlit_extras
+streamlit_extras==0.4.2
